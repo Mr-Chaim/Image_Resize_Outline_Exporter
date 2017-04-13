@@ -4,12 +4,12 @@ Created on Thu Mar 30 23:11:53 2017
 
 @author: samir
 """
-
+#C:\\Users\\samir\\Documents\GitHub\\Image_Resize_Outline_Exporter\\imageResize_and_Export_outline.py
 import cv2
 import csv
 import numpy as np
 from numpy import array
-
+fileSource = []
 np.set_printoptions(threshold=np.inf)
 a = 10
 BLACK = [0,0,0]
@@ -38,7 +38,7 @@ else:
 
 def csvWriter():
     img3 = cv2.imread(dst2)
-    imgPathCSV = open((imgPath + str(a) + 'by' + str(a) + '.csv'),"w+")
+    imgPathCSV = open((imgPath + '_' + str(a) +'pixels' + '.csv'),"w+")
     writeToCsv = csv.writer(imgPathCSV, lineterminator = '\n')
     firstItemFound = 0
     for r in xrange (0,a):
@@ -58,14 +58,12 @@ def csvWriter():
                 writeToCsv.writerow([((c2)-column),((r2)-row)])
                 break    
     imgPathCSV.close
-        
-    
-
 while a<=50:
-    dst2 = (imgPath + str(a) + 'by' + str(a) + '.png')
+    dst2 = (imgPath + '_' + str(a) +'pixels' + '.png')
     dsize = (a,a)
     small = cv2.resize(img2,dsize, interpolation= cv2.INTER_AREA)
     cv2.imwrite (dst2, small)
     img3 = cv2.imread(dst2)
+    fileSource.append((imgPath + '_' + str(a) +'pixels' + '.csv'))
     csvWriter()
     a+=10
